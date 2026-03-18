@@ -4,14 +4,15 @@
  */
 import { motion, AnimatePresence } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
-import { Sun } from 'lucide-react';
+import { Guitar } from 'lucide-react';
 import Confetti from './components/Confetti';
-import photo1 from './assets/photo1.png';
-import photo3 from './assets/photo3_v3.png';
-import photo4 from './assets/photo4.jpg';
-import photo5 from './assets/photo5.jpg';
-import photo6 from './assets/photo6.png';
-import music from './assets/Birthday_Echoes.mp3';
+import photo1 from './assets/IMG_9114.JPG';
+import photo2 from './assets/IMG_8984.JPG';
+import photo3 from './assets/IMG_8299.JPG';
+import photo4 from './assets/2c17a814-1ae8-4567-be84-f83eaedf964d.jpg';
+import photo5 from './assets/5249a938-6561-42a7-9242-bb51e28732ae.jpg';
+import photo6 from './assets/Screenshot 2026-03-18 at 09.09.17.png';
+import music from './assets/The_Unwavering.mp3';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -31,10 +32,11 @@ const itemVariants = {
 
 const photos = [
   { src: photo1, position: 'center' },
-  { src: photo3, position: 'top' },    // Child in pink lifting
+  { src: photo2, position: 'center' },
+  { src: photo3, position: 'center' },
   { src: photo4, position: 'center' },
   { src: photo5, position: 'center' },
-  { src: photo6, position: 'top' },    // High-throw photo
+  { src: photo6, position: 'center' },
 ];
 
 const carouselVariants = {
@@ -92,10 +94,10 @@ const landingVariants = {
   }
 };
 
-const sunVariants = {
+const guitarVariants = {
   animate: {
-    rotate: 360,
-    transition: { duration: 20, repeat: Infinity, ease: "linear" }
+    rotate: [0, -5, 5, -3, 3, 0],
+    transition: { duration: 4, repeat: Infinity, ease: "easeInOut" }
   }
 };
 
@@ -155,9 +157,35 @@ export default function App() {
   };
 
   return (
-    <main className="bg-blue-600 min-h-screen flex items-center justify-center p-4 font-sans text-white relative overflow-hidden">
+    <main
+      className="min-h-screen flex items-center justify-center p-2 sm:p-4 font-sans text-white relative overflow-hidden"
+      style={{ background: 'radial-gradient(ellipse at 50% 35%, #1e1306 0%, #09080f 55%, #05050a 100%)' }}
+    >
       {/* Background Texture Overlay */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper.png')]"></div>
+      <div className="absolute inset-0 opacity-5 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+
+      {/* Animated stage-light orbs */}
+      <motion.div
+        className="absolute top-[20%] left-[50%] -translate-x-1/2 w-[700px] h-[500px] rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse, rgba(180,100,10,0.18) 0%, transparent 70%)' }}
+        animate={{ scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
+        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute bottom-[10%] left-[15%] w-[400px] h-[400px] rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse, rgba(120,60,5,0.12) 0%, transparent 70%)' }}
+        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.9, 0.5] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
+      />
+      <motion.div
+        className="absolute top-[10%] right-[10%] w-[300px] h-[300px] rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse, rgba(160,80,8,0.1) 0%, transparent 70%)' }}
+        animate={{ scale: [1, 1.25, 1], opacity: [0.4, 0.8, 0.4] }}
+        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 5 }}
+      />
+
+      {/* Vignette */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%)' }}></div>
 
       {/* Background music */}
       <audio ref={audioRef} src={music} loop />
@@ -170,7 +198,7 @@ export default function App() {
             animate={{ opacity: 1, scale: 1 }}
             onClick={toggleMute}
             title={muted ? 'Unmute music' : 'Mute music'}
-            className="fixed bottom-6 right-6 z-50 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-full w-12 h-12 flex items-center justify-center text-xl shadow-lg transition-colors border border-white/30"
+            className="fixed bottom-6 right-6 z-50 bg-amber-900/40 hover:bg-amber-800/50 backdrop-blur-sm text-amber-300 rounded-full w-12 h-12 flex items-center justify-center text-xl shadow-lg transition-colors border border-amber-500/30"
           >
             {muted ? '🔇' : '🎵'}
           </motion.button>
@@ -188,17 +216,17 @@ export default function App() {
             className="flex flex-col items-center justify-center text-center z-10 p-4"
           >
             <motion.div
-              className="bg-white/10 backdrop-blur-xl p-10 sm:p-16 rounded-[2rem] border-2 border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.3)] max-w-lg relative overflow-hidden"
+              className="bg-slate-900/80 backdrop-blur-xl p-8 sm:p-14 rounded-[1.5rem] sm:rounded-[2rem] border-2 border-amber-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.6),0_0_80px_rgba(212,160,23,0.12)] w-full max-w-lg relative overflow-hidden"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              {/* Decorative sun in landing */}
+              {/* Decorative guitar in landing */}
               <motion.div
-                className="absolute -top-10 -right-10 text-yellow-300 opacity-20"
-                variants={sunVariants}
+                className="absolute -top-10 -right-10 text-amber-400 opacity-15"
+                variants={guitarVariants}
                 animate="animate"
               >
-                <Sun size={150} />
+                <Guitar size={150} />
               </motion.div>
 
               <motion.h1
@@ -207,83 +235,74 @@ export default function App() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
               >
-                <span className="text-yellow-300 block">Happy</span>
-                <span className="text-pink-400 block">Birthday</span>
-                <span className="text-lime-300 block font-script text-8xl sm:text-9xl -mt-4">Bert!</span>
+                <span className="text-amber-400 block">Happy</span>
+                <span className="text-amber-200 block">Birthday</span>
+                <span className="text-amber-300 block font-script text-8xl sm:text-9xl -mt-4">Dad!</span>
               </motion.h1>
 
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: "0 25px 30px -5px rgba(0,0,0,0.4)" }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleOpen}
-                className="px-12 py-6 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 rounded-full font-bold text-2xl text-white shadow-2xl flex items-center gap-3 mx-auto group relative z-10 border border-white/20"
+                className="px-12 py-6 bg-gradient-to-r from-amber-700 via-amber-500 to-yellow-500 rounded-full font-bold text-2xl text-slate-950 shadow-2xl flex items-center gap-3 mx-auto group relative z-10 border border-amber-300/30"
               >
                 <span>Open Card</span>
                 <motion.span
                   animate={{ x: [0, 5, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
-                >✨</motion.span>
+                >🎸</motion.span>
               </motion.button>
             </motion.div>
           </motion.div>
         ) : (
           <motion.div
             key="card"
-            className="w-full max-w-6xl mx-auto my-4 z-10 p-6 sm:p-8 rounded-[3rem] border-2 border-white/30 shadow-[0_30px_60px_rgba(0,0,0,0.4)] bg-white/5 backdrop-blur-xl flex flex-col items-center justify-center relative overflow-hidden min-h-[600px]"
+            className="w-full max-w-6xl mx-auto my-1 sm:my-4 z-10 p-4 sm:p-8 rounded-2xl sm:rounded-[3rem] border-2 border-amber-500/30 shadow-[0_30px_60px_rgba(0,0,0,0.7),0_0_120px_rgba(212,160,23,0.1)] bg-slate-900/70 backdrop-blur-xl flex flex-col items-center justify-center relative overflow-hidden min-h-[calc(100dvh-1rem)] sm:min-h-[600px]"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
             <Confetti />
 
-            {/* Animated Sun Motif */}
+            {/* Animated Guitar Motif */}
             <motion.div
-              className="absolute top-8 right-8 text-yellow-300/30"
-              variants={sunVariants}
+              className="absolute top-8 right-8 text-amber-400/20"
+              variants={guitarVariants}
               animate="animate"
             >
-              <Sun size={80} strokeWidth={1.5} />
+              <Guitar size={80} strokeWidth={1.5} />
             </motion.div>
 
             <div className="flex flex-col md:flex-row w-full gap-8 items-center">
               {/* Text section */}
               <motion.div
-                className="p-4 sm:p-8 flex flex-col justify-center text-center md:text-left w-full md:w-1/2"
+                className="p-2 sm:p-8 flex flex-col justify-center text-center md:text-left w-full md:w-1/2"
                 variants={itemVariants}
               >
                 <motion.h1
-                  className="font-serif text-5xl sm:text-7xl font-bold leading-tight"
+                  className="font-serif text-4xl sm:text-7xl font-bold leading-tight"
                   variants={itemVariants}
                 >
-                  <span className="text-yellow-300">Happy</span>{' '}
-                  <span className="text-pink-400">Birthday</span>{' '}
-                  <span className="text-lime-300 font-script text-7xl sm:text-9xl block -mt-2">Bert</span>
+                  <span className="text-amber-400">Happy</span>{' '}
+                  <span className="text-amber-200">Birthday</span>{' '}
+                  <span className="text-amber-300 font-script text-6xl sm:text-9xl block -mt-2">Dad</span>
                 </motion.h1>
 
                 <motion.div className="mt-6 sm:mt-8 space-y-4" variants={itemVariants}>
-                  <p className="text-xl sm:text-2xl text-white leading-relaxed font-medium">
-                    A huge happy birthday as another year of incredible change begins
-                  </p>
-                  <p className="text-lg text-white/90 leading-relaxed italic">
-                    A new baby boy on the way, a new house, growing business
-                  </p>
                   <div className="flex items-center gap-3 justify-center md:justify-start">
-                    <p className="text-lg text-white/90 leading-relaxed">
-                      Sending huge love on this special day
+                    <p className="text-lg text-amber-300 font-semibold leading-relaxed">
+                      To another year of projects, adventures, sports and making things happen with those you love
                     </p>
                     <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                      className="text-yellow-400"
+                      variants={guitarVariants}
+                      animate="animate"
+                      className="text-amber-400 shrink-0"
                     >
-                      <Sun size={24} />
+                      <Guitar size={22} />
                     </motion.div>
                   </div>
-                  <p className="text-lg text-white/90 leading-relaxed">
-                    I really would love to be spending more time with you all this year
-                  </p>
-                  <p className="text-lg text-white font-semibold leading-relaxed">
-                    To another year of adventures, love, joy and growth
+                  <p className="text-lg text-white/80 leading-relaxed">
+                    Thank you for all you do for us
                   </p>
                 </motion.div>
 
@@ -291,15 +310,16 @@ export default function App() {
                   className="mt-8 sm:mt-10 text-xl text-white space-y-2"
                   variants={itemVariants}
                 >
-                  <p className="opacity-80">Lots of love,</p>
-                  <p className="font-script text-7xl text-yellow-300 -ml-2 drop-shadow-lg">
-                    Tim x
+                  <p className="opacity-70 text-amber-100">Lots of love,</p>
+                  <p className="font-script text-7xl text-amber-400 -ml-2 drop-shadow-lg">
+                    Tim
                   </p>
+                  <p className="text-2xl text-amber-300 font-semibold -mt-2">x</p>
                 </motion.div>
               </motion.div>
 
               {/* Image Carousel Section */}
-              <div className="w-full md:w-1/2 h-[400px] sm:h-[500px] relative flex shadow-inner items-center justify-center p-4">
+              <div className="w-full md:w-1/2 h-[300px] sm:h-[500px] relative flex shadow-inner items-center justify-center p-4">
                 <AnimatePresence initial={false} custom={direction}>
                   <motion.div
                     key={page}
@@ -313,7 +333,7 @@ export default function App() {
                     <img
                       src={photos[photoIndex].src}
                       alt={`Memory ${photoIndex + 1}`}
-                      className="w-full h-full object-cover rounded-3xl shadow-2xl border-4 border-white pointer-events-none"
+                      className="w-full h-full object-cover rounded-3xl shadow-2xl border-4 border-amber-500/60 pointer-events-none"
                       style={{ objectPosition: photos[photoIndex].position }}
                     />
                   </motion.div>
@@ -324,7 +344,7 @@ export default function App() {
                   {photos.map((_, i) => (
                     <motion.div
                       key={i}
-                      className={`h-2 w-2 rounded-full ${i === photoIndex ? 'bg-yellow-300' : 'bg-white/30'}`}
+                      className={`h-2 w-2 rounded-full ${i === photoIndex ? 'bg-amber-400' : 'bg-white/20'}`}
                       animate={{ scale: i === photoIndex ? 1.5 : 1 }}
                     />
                   ))}
